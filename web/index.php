@@ -51,7 +51,7 @@
                     <div class="card bg-light text-left border-top-0 rounded-0 rounded-bottom">
                         <div class="card-body d-flex flex-column gap-2">
                             <input type="text" id="load-id" placeholder="Note ID" title="Note ID"
-                                   class="form-control">
+                                   class="form-control" style="text-transform: uppercase">
                             <textarea class="form-control" title="Note" id="load-note" readonly></textarea>
                         </div>
                     </div>
