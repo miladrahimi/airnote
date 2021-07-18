@@ -1,7 +1,5 @@
 <?php
 
-sleep(2);
-
 header('Content-type: application/json');
 
 function path(string $id): string
