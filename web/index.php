@@ -10,6 +10,11 @@
     <link rel="icon" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        textarea {
+            height: 40vh;
+        }
+    </style>
 </head>
 <body>
 
