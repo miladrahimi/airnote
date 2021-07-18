@@ -1,3 +1,3 @@
 # AirNote
 
-Online Clipboard!
+An online clipboard to share notes!
