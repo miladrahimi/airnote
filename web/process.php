@@ -31,9 +31,10 @@ if (isset($_POST['note']) && empty($_POST['note']) == false) {
         exit(json_encode(['error' => 'Internal Error!']));
     }
 } elseif (isset($_GET['id']) && empty($_GET['id']) == false) {
-    if (file_exists(path($_GET['id']))) {
+    $path = path(strtolower($_GET['id']));
+    if (file_exists($path)) {
         http_response_code(200);
-        exit(json_encode(['note' => file_get_contents(path($_GET['id']))]));
+        exit(json_encode(['note' => file_get_contents($path)]));
     }
 
     http_response_code(404);
