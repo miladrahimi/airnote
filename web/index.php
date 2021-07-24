@@ -94,7 +94,7 @@
         // Share (Button)
         $('#share-btn').click(function () {
             let me = $(this)
-            let note = $('#save-note')
+            let note = $('#share-note')
 
             me.val('Processing...').prop('disabled', true)
             note.prop('disabled', true)
