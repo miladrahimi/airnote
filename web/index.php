@@ -86,7 +86,7 @@
         $('#save-note').bind('input', function () {
             $('#save-btn').attr('disabled',
                 $(this).val() === '' ||
-                $(this).val().startsWith('.: RESPONSE :.')
+                $(this).val().startsWith('[RESPONSE]')
             ).val('Save')
         })
 
@@ -102,7 +102,7 @@
 
             request.done(function (response) {
                 note.val([
-                    '.: RESPONSE :.',
+                    '[RESPONSE]',
                     'NOTE ID: ' + response['id'].toUpperCase(),
                     'NOTE URL: ' + response['url'],
                 ].join("\n"))
