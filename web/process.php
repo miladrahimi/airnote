@@ -12,10 +12,11 @@ function url(string $id): string
     return ($_ENV['URL'] ?? '') . '/n/' . $id . '.txt';
 }
 
-if (isset($_POST['note'])) {
+if (isset($_POST['note']) && empty($_POST['note']) == false) {
     try {
         do {
             $id = bin2hex(random_bytes(2));
+            $id = str_replace(['0', 'o'], 'x', $id);
         } while (file_exists(path($id)));
 
         file_put_contents(path($id), $_POST['note']);

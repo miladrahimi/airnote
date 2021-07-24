@@ -82,23 +82,34 @@
             })
         })
 
+        // Save (Note)
+        $('#save-note').bind('input', function () {
+            $('#save-btn').attr('disabled',
+                $(this).val() === '' ||
+                $(this).val().startsWith('.: RESPONSE :.')
+            ).val('Save')
+        })
+
         // Save (Button)
         $('#save-btn').click(function () {
             let me = $(this)
             let note = $('#save-note')
 
             me.val('Processing...').prop('disabled', true)
+            note.prop('disabled', true)
 
             let request = $.ajax({url: 'process.php', type: 'post', data: {'note': note.val()}})
 
             request.done(function (response) {
                 note.val([
+                    '.: RESPONSE :.',
                     'NOTE ID: ' + response['id'].toUpperCase(),
                     'NOTE URL: ' + response['url'],
                 ].join("\n"))
                 me.val('Saved :)')
                 setTimeout(function () {
-                    me.val('Save').prop('disabled', false)
+                    me.val('Save').prop('disabled', true)
+                    note.prop('disabled', false)
                 }, 2000)
             })
 
@@ -107,6 +118,7 @@
                 me.val('Failed :(')
                 setTimeout(function () {
                     me.val('Save').prop('disabled', false)
+                    note.prop('disabled', false)
                 }, 2000)
             })
         })
