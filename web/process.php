@@ -20,11 +20,8 @@ if (isset($_POST['note']) && empty($_POST['note']) == false) {
 
         file_put_contents(path($id), $_POST['note']);
 
-        http_response_code(201);
-        exit(json_encode([
-            'id' => $id,
-            'url' => url($id)
-        ]));
+        http_response_code(200);
+        exit(json_encode(['id' => $id, 'url' => url($id)]));
     } catch (Exception $e) {
         error_log(json_encode($e));
         http_response_code(500);
@@ -38,7 +35,7 @@ if (isset($_POST['note']) && empty($_POST['note']) == false) {
     }
 
     http_response_code(404);
-    exit(json_encode(['error' => 'Not found.']));
+    exit(json_encode(['error' => 'Note Not Found!']));
 } else {
     http_response_code(400);
     exit(json_encode(['error' => 'Bad Request!']));
