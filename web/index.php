@@ -127,6 +127,10 @@
         // Receive
         $('#receive-id').keyup(function () {
             let id = $(this).val()
+            if (id === '') {
+                return;
+            }
+
             let note = $('#receive-note')
             note.val('Receiving...')
 
