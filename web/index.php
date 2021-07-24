@@ -26,33 +26,34 @@
 
             <ul class="nav nav-tabs mt-5" id="tabs" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="save-tab" data-bs-toggle="tab" data-bs-target="#save"
-                            type="button" role="tab" aria-controls="save" aria-selected="true">Save
+                    <button class="nav-link active" id="share-tab" data-bs-toggle="tab" data-bs-target="#share"
+                            type="button" role="tab" aria-controls="share" aria-selected="true">Share
                     </button>
                 </li>
                 <li class="nav-item flex-fill" role="presentation">
-                    <button class="nav-link" id="load-tab" data-bs-toggle="tab" data-bs-target="#load"
-                            type="button" role="tab" aria-controls="load" aria-selected="false">Load
+                    <button class="nav-link" id="receive-tab" data-bs-toggle="tab" data-bs-target="#receive"
+                            type="button" role="tab" aria-controls="receive" aria-selected="false">Receive
                     </button>
                 </li>
             </ul>
 
             <div class="tab-content" id="tabsContent">
-                <div class="tab-pane fade show active" id="save" role="tabpanel" aria-labelledby="save-tab">
+                <div class="tab-pane fade show active" id="share" role="tabpanel" aria-labelledby="share-tab">
                     <div class="card bg-light text-left border-top-0 rounded-0 rounded-bottom">
                         <div class="card-body d-flex flex-column gap-2">
-                            <textarea class="form-control" title="Note" id="save-note"
-                                      placeholder="Enter your note here and press Save button."></textarea>
-                            <input class="btn btn-dark" type="button" value="Save" id="save-btn" disabled>
+                            <textarea class="form-control" title="Note" id="share-note"
+                                      placeholder="Enter your note here and press Share button."></textarea>
+                            <input class="btn btn-dark" type="button" value="Share" id="share-btn" disabled>
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="load" role="tabpanel" aria-labelledby="load-tab">
+                <div class="tab-pane fade" id="receive" role="tabpanel" aria-labelledby="receive-tab">
                     <div class="card bg-light text-left border-top-0 rounded-0 rounded-bottom">
                         <div class="card-body d-flex flex-column gap-2">
-                            <input type="text" id="load-id" placeholder="Note ID" title="Note ID"
+                            <input type="text" id="receive-id" placeholder="Note ID" title="Note ID"
                                    class="form-control" style="text-transform: uppercase">
-                            <textarea class="form-control" title="Note" id="load-note" readonly></textarea>
+                            <textarea class="form-control text-start" title="Note" id="receive-note"
+                                      readonly>Enter the note id to receive the note content...</textarea>
                         </div>
                     </div>
                 </div>
@@ -82,16 +83,16 @@
             })
         })
 
-        // Save (Note)
-        $('#save-note').bind('input', function () {
-            $('#save-btn').attr('disabled',
+        // Share (Note)
+        $('#share-note').bind('input', function () {
+            $('#share-btn').attr('disabled',
                 $(this).val() === '' ||
                 $(this).val().startsWith('[RESPONSE]')
-            ).val('Save')
+            ).val('Share')
         })
 
-        // Save (Button)
-        $('#save-btn').click(function () {
+        // Share (Button)
+        $('#share-btn').click(function () {
             let me = $(this)
             let note = $('#save-note')
 
@@ -106,9 +107,9 @@
                     'NOTE ID: ' + response['id'].toUpperCase(),
                     'NOTE URL: ' + response['url'],
                 ].join("\n"))
-                me.val('Saved :)')
+                me.val('Shared :)')
                 setTimeout(function () {
-                    me.val('Save').prop('disabled', true)
+                    me.val('Share').prop('disabled', true)
                     note.prop('disabled', false)
                 }, 2000)
             })
@@ -117,17 +118,17 @@
                 console.error(jqXHR, textStatus, errorThrown)
                 me.val('Failed :(')
                 setTimeout(function () {
-                    me.val('Save').prop('disabled', false)
+                    me.val('Share').prop('disabled', false)
                     note.prop('disabled', false)
                 }, 2000)
             })
         })
 
-        // Load
-        $('#load-id').keyup(function () {
+        // Receive
+        $('#receive-id').keyup(function () {
             let id = $(this).val()
-            let note = $('#load-note')
-            note.val('Loading...')
+            let note = $('#receive-note')
+            note.val('Receiving...')
 
             let request = $.ajax({url: 'process.php', type: 'get', data: {'id': id}})
 
@@ -140,7 +141,7 @@
                     note.val('ERROR: Note not found :(')
                 } else {
                     console.error(jqXHR, textStatus, errorThrown)
-                    note.val('ERROR: Failed to load the note :(')
+                    note.val('ERROR: Failed to receive the note :(')
                 }
             })
         })
