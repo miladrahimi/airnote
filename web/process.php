@@ -12,7 +12,7 @@ function url(string $id): string
     return ($_ENV['URL'] ?? '') . '/n/' . $id . '.txt';
 }
 
-if (isset($_POST['note']) && empty($_POST['note']) == false) {
+if (isset($_POST['note'])) {
     try {
         do {
             $id = bin2hex(random_bytes(2));

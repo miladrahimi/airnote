@@ -82,15 +82,6 @@
             })
         })
 
-        // Save (Note)
-        $('#save-note').keyup(function () {
-            $('#save-btn').attr('disabled',
-                $(this).val() === '' ||
-                $(this).val().startsWith('NOTE ID: ') ||
-                $(this).val() === 'ERROR!'
-            ).val('Save')
-        })
-
         // Save (Button)
         $('#save-btn').click(function () {
             let me = $(this)
