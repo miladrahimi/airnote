@@ -15,8 +15,7 @@ function url(string $id): string
 if (isset($_POST['note']) && empty($_POST['note']) == false) {
     try {
         do {
-            $id = bin2hex(random_bytes(2));
-            $id = str_replace(['0', 'o'], 'x', $id);
+            $id = str_replace(['0', 'o'], 'x', bin2hex(random_bytes(2)));
         } while (file_exists(path($id)));
 
         file_put_contents(path($id), $_POST['note']);
